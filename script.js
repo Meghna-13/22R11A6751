@@ -1,4 +1,3 @@
-// script.js for the corresponding HTML file
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     const resultDiv = document.querySelector('.result');
