@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        URL Shortner Web App
+    </title>
+</head>
+<body>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple URL shortener web application that allows users to shorten long URLs into manageable links.">
+
+    <h1>
+        URL Shortener Web App
+    </h1>
+    <div>
+        <p>
+            Welcome to the URL Shortener Web App! 
+            This application allows you to shorten long URLs into more manageable links.
+            Simply enter your long URL in the input field below and click the "Shorten" button to generate a shortened version.
+        </p>
+        <div id="urlListContainer">
+            <h3>Shortened URLs (up to 5):</h3>
+            <ul id="urlList"></ul>
+        </div>
+        <form id="shortenForm" onsubmit="return false;">
+            <label for="urlInput">Long URL:</label>
+            <input type="text" id="urlInput" placeholder="Enter your long URL here">
+            <label for="shortcodeInput">Preferred Shortcode (optional):</label>
+            <input type="text" id="shortcodeInput" maxlength="10" placeholder="e.g. mycode">
+            <label for="validityInput">Validity (minutes, optional):</label>
+            <input type="number" id="validityInput" min="1" max="1440" placeholder="30">
+            <button id="shortenButton">Shorten</button>
+        </form>
+        <script>
+            const urlList = [];
+            const maxUrls = 5;
+
+            function renderUrlList() {
+            const ul = document.getElementById('urlList');
+            ul.innerHTML = '';
+            urlList.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                <span>Original: <a href="${item.longUrl}" target="_blank">${item.longUrl}</a></span><br>
+                <span>Short URL: <a href="#" onclick="redirectToOriginal(${idx});return false;">${item.shortUrl}</a></span>
+                <span> (valid till: ${new Date(item.expiry).toLocaleTimeString()})</span>
+                `;
+                ul.appendChild(li);
+            });
+            }
+
+            function redirectToOriginal(idx) {
+            const item = urlList[idx];
+            if (Date.now() > item.expiry) {
+                alert('This short URL has expired.');
+            } else {
+                window.open(item.longUrl, '_blank');
+            }
+            }
+
+            document.getElementById('shortenButton').onclick = function() {
+            const longUrl = document.getElementById('urlInput').value.trim();
+            const shortcode = document.getElementById('shortcodeInput').value.trim();
+            let validity = parseInt(document.getElementById('validityInput').value, 10);
+            if (!longUrl) {
+                alert('Please enter a valid URL.');
+                return;
+            }
+            if (urlList.length >= maxUrls) {
+                alert('You can only have up to 5 concurrent shortened URLs.');
+                return;
+            }
+            if (!validity || validity < 1) validity = 30;
+            let shortUrl = 'https://short.url/';
+            if (shortcode) {
+                shortUrl += shortcode;
+            } else {
+                shortUrl += Math.random().toString(36).substring(2, 8);
+            }
+            urlList.push({
+                longUrl,
+                shortUrl,
+                expiry: Date.now() + validity * 60000
+            });
+            renderUrlList();
+            document.getElementById('shortenForm').reset();
+            };
+
+            window.redirectToOriginal = redirectToOriginal;
+        </script>
+        <!-- link this html to style.css-->
+
+        <style>
+            input[type="text"], input[type="number"] {
+                padding: 10px;
+                margin-right: 10px;
+            }
+            button {
+                padding: 10px 15px;
+            }
+            p {
+                margin-top: 20px;
+            }
+            #shortenedUrl {
+                font-weight: bold;
+                color: blue;
+            }
+        </style>
+    </div>
+</body>

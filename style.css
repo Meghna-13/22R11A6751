@@ -1,0 +1,90 @@
+/* style.css in vanilla css for the corresponding HTML file */
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    color: #333;
+}
+h2 {
+    color: #555;
+}
+p {
+    color: #666;
+    line-height: 1.6;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+#urlList {
+    margin-top: 20px;
+}
+#urlList li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+#urlList li a {
+    text-decoration: none;
+    color: #007BFF;
+}
+#urlList li a:hover {
+    text-decoration: underline;
+}
+/* Button styles */
+button, .secondary-button {
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #007BFF;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+button:hover, .secondary-button:hover {
+    background-color: #0056b3;
+}
+/* Input styles */
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+/* Specific styles for buttons */
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.secondary-button {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background-color: #007B9E;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 10px;
+    margin-right: 10px;
+}
+            
+                
