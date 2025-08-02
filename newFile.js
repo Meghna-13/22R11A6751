@@ -1,4 +1,3 @@
-//the shorturl thus created is not providing access the original URL.
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('urlForm');
     const urlInput = document.getElementById('urlInput');
